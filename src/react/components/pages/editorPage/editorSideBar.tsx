@@ -4,10 +4,12 @@
 import React from "react";
 import { AutoSizer, List } from "react-virtualized";
 import { FontIcon } from "@fluentui/react";
-import { IAsset, AssetState, ISize, AssetLabelingState } from "../../../../models/applicationState";
+import { IAsset, AssetState, ISize, AssetLabelingState, IProject } from "../../../../models/applicationState";
 import { AssetPreview, ContentSource } from "../../common/assetPreview/assetPreview";
 import { strings } from "../../../../common/strings";
 import _ from "lodash";
+import TrainButton from "./trainButton";
+import IProjectActions from "../../../../redux/actions/projectActions";
 
 /**
  * Properties for Editor Side Bar
@@ -23,6 +25,8 @@ export interface IEditorSideBarProps {
     onAssetLoaded?: (asset: IAsset, ContentSource: ContentSource) => void;
     selectedAsset?: IAsset;
     thumbnailSize?: ISize;
+    project: IProject;
+    actions: IProjectActions;
 }
 
 /**
@@ -50,6 +54,7 @@ export default class EditorSideBar extends React.Component<IEditorSideBarProps, 
     public render() {
         return (
             <div className="editor-page-sidebar-nav">
+                <TrainButton project={this.props.project} actions={this.props.actions} />
                 <AutoSizer>
                     {({ height, width }) => (
                         <List

@@ -33,7 +33,7 @@ export function Sidebar({ project }) {
                         <FontIcon iconName="Tag" />
                     </ConditionalNavLink>
                 </li>
-               <li>
+               {/* <li>
                     <ConditionalNavLink disabled={!projectId}
                         title={strings.train.title}
                         to={`/projects/${projectId}/train`}>
@@ -75,7 +75,7 @@ export function Sidebar({ project }) {
                     <NavLink title={strings.layoutPredict.title} to={`/layout-analyze`} role="button">
                         <FontIcon iconName="KeyPhraseExtraction" />
                     </NavLink>
-                </li>
+                </li> */}
             </ul>
             <div className="app-sidebar-fill"></div>
             <ul>

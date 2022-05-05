@@ -268,6 +268,8 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
                             </PrimaryButton>
                         </div>}
                         <EditorSideBar
+                            actions={this.props.actions}
+                            project={this.props.project}
                             assets={assets}
                             selectedAsset={selectedAsset ? selectedAsset.asset : null}
                             onBeforeAssetSelected={this.onBeforeAssetSelected}
