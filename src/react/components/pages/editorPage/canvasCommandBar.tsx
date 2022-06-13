@@ -102,17 +102,17 @@ export const CanvasCommandBar: React.FunctionComponent<ICanvasCommandBarProps> =
             },
         };
         commandBarItems = [
-            layerItem,
-            {
-                key: "drawRegion",
-                text: strings.editorPage.canvas.canvasCommandBar.items.drawRegion,
-                iconProps: { iconName: "FieldNotChanged" },
-                toggle: true,
-                checked: props.drawRegionMode,
-                className: !props.layers["drawnRegions"] ? "disabled" : "",
-                onClick: () => props.handleToggleDrawRegionMode(),
-                disabled: !props.layers["drawnRegions"],
-            }
+            // layerItem,
+            // {
+            //     key: "drawRegion",
+            //     text: strings.editorPage.canvas.canvasCommandBar.items.drawRegion,
+            //     iconProps: { iconName: "FieldNotChanged" },
+            //     toggle: true,
+            //     checked: props.drawRegionMode,
+            //     className: !props.layers["drawnRegions"] ? "disabled" : "",
+            //     onClick: () => props.handleToggleDrawRegionMode(),
+            //     disabled: !props.layers["drawnRegions"],
+            // }
         ];
         if (!props.enableDrawRegion) {
             layerItem.subMenuProps.items = layerItem.subMenuProps.items.filter(item => item.key !== "DrawnRegions");
@@ -209,16 +209,16 @@ export const CanvasCommandBar: React.FunctionComponent<ICanvasCommandBarProps> =
                         secondaryText: strings.editorPage.canvas.canvasCommandBar.farItems.additionalActions.subIMenuItems.costWarningMessage,
                         className: "cost-warning-message"
                     },
-                    {
-                        key: 'divider_1',
-                        itemType: ContextualMenuItemType.Divider,
-                    },
-                    {
-                        key: "deleteAsset",
-                        text: strings.editorPage.asset.delete.title,
-                        iconProps: { iconName: "Delete" },
-                        onClick: () => { if (props.handleAssetDeleted) props.handleAssetDeleted(); },
-                    }
+                    // {
+                    //     key: 'divider_1',
+                    //     itemType: ContextualMenuItemType.Divider,
+                    // },
+                    // {
+                    //     key: "deleteAsset",
+                    //     text: strings.editorPage.asset.delete.title,
+                    //     iconProps: { iconName: "Delete" },
+                    //     onClick: () => { if (props.handleAssetDeleted) props.handleAssetDeleted(); },
+                    // }
                 ],
             },
         })

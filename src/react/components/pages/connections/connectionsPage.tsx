@@ -128,6 +128,7 @@ export default class ConnectionPage extends React.Component<IConnectionPageProps
     }
 
     private async loadConnection(connectionId: string) {
+        console.log("loadConnection: connectionId :-", connectionId);
         let connection = this.props.connections.find((connection) => connection.id === connectionId);
         if (!connection) {
             connection = { id: null, name: null, providerType: "azureBlobStorage", providerOptions: {} };

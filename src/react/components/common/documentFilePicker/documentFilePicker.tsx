@@ -52,15 +52,15 @@ export class DocumentFilePicker extends React.Component<IDocumentFilePickerProps
         return <>
             <div
                 className="document-file-picker">
-                <div className="title mr-2">{strings.documentFilePicker.source}:</div>
-                <div className="container-space-between">
-                    <Dropdown
+                {/* <div className="title mr-2">{strings.documentFilePicker.source}</div> */}
+                <div className="container-space-between--">
+                    {/* <Dropdown
                         className="sourceDropdown"
                         selectedKey={this.state.sourceOption}
                         options={sourceOptions}
                         disabled={disabled}
                         onChange={this.onSelectSourceChange}
-                    />
+                    /> */}
                     {this.state.sourceOption === "localFile" &&
                         <>
                             <input
@@ -73,7 +73,7 @@ export class DocumentFilePicker extends React.Component<IDocumentFilePickerProps
                                 disabled={disabled}
                             />
                             <TextField
-                                className="ml-2 local-file"
+                                className="local-file"
                                 theme={getGreenWithWhiteBackgroundTheme()}
                                 style={{cursor: (disabled ? "default" : "pointer")}}
                                 onClick={this.handleDummyInputClick}

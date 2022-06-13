@@ -173,7 +173,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
 
         this.isUnmount = false;
         this.isOCROrAutoLabelingBatchRunning = false;
-        const projectId = this.props.match.params["projectId"];
+        const projectId = this.props.match.params["projectId"] ?? "ookC0C0ix";
         if (this.props.project) {
             await this.loadProjectAssets();
             this.props.appTitleActions.setTitle(this.props.project.name);
@@ -268,6 +268,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
                             </PrimaryButton>
                         </div>}
                         <EditorSideBar
+                            history={this.props.history}
                             actions={this.props.actions}
                             project={this.props.project}
                             assets={assets}
@@ -276,6 +277,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
                             onAssetSelected={this.selectAsset}
                             onAssetLoaded={this.onAssetLoaded}
                             thumbnailSize={this.state.thumbnailSize}
+                            loadProjectAssets={this.loadProjectAssets}
                         />
 
                     </div>

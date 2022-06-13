@@ -21,15 +21,15 @@ export function Sidebar({ project }) {
     return (
         <div className="bg-lighter-2 app-sidebar" id="appSidebar">
             <ul>
-                <li>
+                {/* <li>
                     <NavLink title={"Home"} to={`/`} exact role="button">
                         <FontIcon iconName="Home" />
                     </NavLink>
-                </li>
+                </li> */}
                 <li>
                     <ConditionalNavLink disabled={!projectId}
                         title={strings.tags.editor}
-                        to={`/projects/${projectId}/edit`}>
+                        to={`/`}>
                         <FontIcon iconName="Tag" />
                     </ConditionalNavLink>
                 </li>
@@ -79,11 +79,11 @@ export function Sidebar({ project }) {
             </ul>
             <div className="app-sidebar-fill"></div>
             <ul>
-                <li>
+                {/* <li>
                     <NavLink title={strings.appSettings.title} to={`/settings`} role="button">
                         <FontIcon iconName="Settings" />
                     </NavLink>
-                </li>
+                </li> */}
             </ul>
         </div>
     );

@@ -24,7 +24,7 @@ export function MainContentRouter() {
     return (
         <div className="app-content text-light">
             <Switch>
-                <Route path="/" exact component={HomePage} />
+                <Route path="/" exact component={EditorPage} />
                 <Route path="/settings" component={AppSettingsPage} />
                 <Route path="/connections/:connectionId" component={ConnectionPage} />
                 <Route path="/connections" exact component={ConnectionPage} />

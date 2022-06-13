@@ -176,6 +176,7 @@ export default class TrainButton extends React.Component<ITrainButtonProps, ITra
                 }
             }
             await this.props.actions.saveProject({ ...this.props.project, assets: newAssets }, false, false);
+            await this.props.actions.saveModel(trainResult["modelInfo"]["modelId"]);
             this.setState((prevState, props) => ({
                 isTraining: false,
                 trainMessage: this.getTrainMessage(trainResult),

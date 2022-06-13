@@ -146,6 +146,7 @@ export interface IAppStrings {
         backEndNotAvailable: string,
         addName: string,
         downloadJson: string;
+        uploadButtonLabel: string;
         trainConfirm: {
             title: string;
             message: string;

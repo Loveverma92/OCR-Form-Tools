@@ -139,13 +139,14 @@ export const english: IAppStrings = {
         modelNameTitle: "Model name",
         labelFolderTitle: "Source",
         defaultLabelFolderURL: "/shared",
-        title: "Train",
+        title: "Train Model",
         training: "Training",
         pleaseWait: "Please wait",
         notTrainedYet: "Not trained yet",
         backEndNotAvailable: "Checkbox feature will work in future version of Form Recognizer service, please stay tuned.",
         addName: "Add a model name...",
         downloadJson: "Download JSON file",
+        uploadButtonLabel: "Upload",
         trainConfirm: {
             title: "Labels not revised yet",
             message: "There are newly auto-labeled files not yet revised by you, do you want to train with those files?"
@@ -269,7 +270,7 @@ export const english: IAppStrings = {
         apiKeyPlaceholder: "need apikey",
     },
     documentFilePicker: {
-        source: "Source",
+        source: "",
         localFile: "Local file",
         url: "URL",
     },

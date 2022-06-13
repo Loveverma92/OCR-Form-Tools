@@ -10,6 +10,8 @@ import { strings } from "../../../../common/strings";
 import _ from "lodash";
 import TrainButton from "./trainButton";
 import IProjectActions from "../../../../redux/actions/projectActions";
+import UploadButton from "./uploadFileButton";
+import { RouteComponentProps } from "react-router-dom";
 
 /**
  * Properties for Editor Side Bar
@@ -19,6 +21,7 @@ import IProjectActions from "../../../../redux/actions/projectActions";
  * @member thumbnailSize - The size of the asset thumbnails
  */
 export interface IEditorSideBarProps {
+    history: RouteComponentProps["history"];
     assets: IAsset[];
     onAssetSelected: (asset: IAsset) => void;
     onBeforeAssetSelected?: () => boolean;
@@ -27,6 +30,7 @@ export interface IEditorSideBarProps {
     thumbnailSize?: ISize;
     project: IProject;
     actions: IProjectActions;
+    loadProjectAssets: () => Promise<void>;
 }
 
 /**
@@ -52,9 +56,17 @@ export default class EditorSideBar extends React.Component<IEditorSideBarProps, 
     private listRef: React.RefObject<List> = React.createRef();
 
     public render() {
+        const visitedAssets = this.props.assets.filter(asset => asset.state !== AssetState.Tagged)
+
         return (
             <div className="editor-page-sidebar-nav">
                 <TrainButton project={this.props.project} actions={this.props.actions} />
+                {/* <UploadButton
+                    project={this.props.project}
+                    actions={this.props.actions}
+                    history={this.props.history}
+                    loadProjectAssets={this.props.loadProjectAssets}
+                    /> */}
                 <AutoSizer>
                     {({ height, width }) => (
                         <List
@@ -62,7 +74,8 @@ export default class EditorSideBar extends React.Component<IEditorSideBarProps, 
                             className="asset-list"
                             height={height}
                             width={width}
-                            rowCount={this.props.assets.length}
+                            rowCount={visitedAssets.length}
+                            // rowCount={this.props.assets.length}
                             rowHeight={() => this.getRowHeight(width)}
                             rowRenderer={this.rowRenderer}
                             overscanRowCount={10}
@@ -115,7 +128,9 @@ export default class EditorSideBar extends React.Component<IEditorSideBarProps, 
     }
 
     private rowRenderer = ({ key, index, style }): JSX.Element => {
-        const asset = this.props.assets[index];
+        const visitedAssets = this.props.assets.filter(asset => asset.state !== AssetState.Tagged)
+        // const asset = this.props.assets[index];
+        const asset = visitedAssets[index];
         const selectedAsset = this.props.selectedAsset;
 
         return (

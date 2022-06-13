@@ -211,12 +211,12 @@ export default class TagInputItem extends React.Component<ITagInputItemProps, IT
                         :
                         <span className="tag-index-span"></span>
                     }
-                    <IconButton
+                    {/* <IconButton
                         title={strings.tags.toolbar.contextualMenu}
                         ariaLabel={strings.tags.toolbar.contextualMenu}
                         className="tag-input-toolbar-iconbutton ml-2"
                         iconProps={{ iconName: "ChevronDown" }}
-                        onClick={this.onDropdownClick} />
+                        onClick={this.onDropdownClick} /> */}
                 </div>
             </div>
         );

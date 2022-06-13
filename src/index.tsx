@@ -21,6 +21,7 @@ import registerMixins from "./registerMixins";
     registerMixins();
     registerProviders();
     const defaultState: IApplicationState = initialState;
+    console.log(defaultState);
     const store = await createReduxStore(defaultState, true);
 
     let noFocusOutline = true;

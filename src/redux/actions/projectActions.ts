@@ -30,6 +30,7 @@ import clone from "rfdc";
 import _ from "lodash";
 import { decryptProject } from "../../common/utils";
 import { constants } from "../../common/constants";
+import ServerApisHelper from "../../services/serverApisHelper";
 
 /**
  * Actions to be performed in relation to projects
@@ -37,9 +38,11 @@ import { constants } from "../../common/constants";
 export default interface IProjectActions {
     loadProject(project: IProject, token?: {}): Promise<IProject>;
     saveProject(project: IProject, saveTags?: boolean, updateTagsFromFiles?: boolean): Promise<IProject>;
+    saveModel(modelId: string): Promise<void>;
     deleteProject(project: IProject): Promise<void>;
     closeProject(): void;
     addAssetToProject(project: IProject, fileName: string, buffer: Buffer, analyzeResult: any): Promise<IAsset>;
+    addAssetToProjectWithoutAnalyze(project: IProject, fileName: string, buffer: Buffer): Promise<IAsset>;
     deleteAsset(project: IProject, assetMetadata: IAssetMetadata): Promise<void>;
     loadAssets(project: IProject): Promise<IAsset[]>;
     refreshAsset(project: IProject, assetName: string): Promise<void>;
@@ -127,6 +130,17 @@ export function saveProject(project: IProject, saveTags?: boolean, updateTagsFro
     };
 }
 
+/**
+ * Dispatches Save Model action
+ * @param modelId - Model ID to save
+ */
+export function saveModel(modelId: string)
+    : (dispatch: Dispatch, getState: () => IApplicationState) => Promise<void> {
+    return async (dispatch: Dispatch, getState: () => IApplicationState) => {
+        await ServerApisHelper.saveModelApi({ "model-id": modelId });
+    };
+}
+
 export function updateProjectTagsFromFiles(project: IProject, asset?: string): (dispatch: Dispatch) => Promise<void> {
     return async (dispatch: Dispatch) => {
         const projectService = new ProjectService();
@@ -198,6 +212,21 @@ export function addAssetToProject(project: IProject, fileName: string, buffer: B
     };
 }
 /**
+ * add asset, ocr data, labels to project storage.
+ */
+ export function addAssetToProjectWithoutAnalyze(project: IProject, fileName: string, buffer: Buffer): (dispatch: Dispatch) => Promise<IAsset> {
+    return async (dispatch: Dispatch) => {
+        const assetService = new AssetService(project);
+        await assetService.uploadBuffer(fileName, buffer);
+        const assets = await assetService.getAssets();
+        const assetName = project.folderPath ? `${project.folderPath}/${fileName}` : fileName;
+        const asset = assets.find(a => a.name === assetName);
+
+        dispatch(addAssetToProjectAction(asset));
+        return asset;
+    };
+}
+/**
  * Dispatches Delete Asset action
  */
 export function deleteAsset(project: IProject, assetMetadata: IAssetMetadata): (dispatch: Dispatch) => void {
@@ -230,7 +259,7 @@ export function loadAssets(project: IProject): (dispatch: Dispatch, getState: ()
             dispatch(loadProjectAssetsAction(assets));
         }
         if (shouldAssetsUpdate) {
-            const {currentProject} = getState();
+            const { currentProject } = getState();
             await AssetService.checkAndUpdateSchema(currentProject);
         }
         return assets;
